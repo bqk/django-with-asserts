@@ -18,8 +18,13 @@ class ElementIDNotFound(HTMLNotPresent):
 class AssertHTMLContext(object):
     """Context manager for AssertHTMLMixin.assertHTML"""
 
-    def __init__(self, response, test_case, selector, element_id,
-                 status_code, msg):
+    def __init__(self, response,
+                 selector=None, 
+                 element_id=None,
+                 expected=None,
+                 status_code=200,
+                 msg=None,
+                 test_case=None):
         self.response = response
         self.test_case = test_case
         self.status_code = status_code
@@ -31,7 +36,10 @@ class AssertHTMLContext(object):
 
     def __enter__(self):
         # Similar to assertContains(), we verify the status code
-        self.test_case.assertEqual(self.response.status_code, self.status_code)
+        if self.test_case is not None:
+            self.test_case.assertEqual(self.response.status_code, self.status_code)
+        else:
+            assert self.response.status_code == self.status_code
 
         # TODO consider validating self.response['Content-Type']
 
@@ -61,3 +69,6 @@ class AssertHTMLContext(object):
 
     def __exit__(self, exc_type, exc_value, tb):
         pass
+
+def assert_html(*args, **kwargs):
+    return AssertHTMLContext(*args, **kwargs)
