@@ -18,7 +18,8 @@ Into this::
     with self.assertHTML(resp, 'input[name="email"]') as (elem,):
         self.assertEqual(elem.value, 'bob@example.com')
 
-Or this (useful outside of TestCase subclasses, e.g. py.test):
+Or this (useful outside of TestCase subclasses, e.g. py.test)::
+
     with assert_html(resp, 'input[name="email"]') as (elem,):
         self.assertEqual(elem.value, 'bob@example.com')  
 
