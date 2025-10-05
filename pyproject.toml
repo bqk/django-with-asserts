@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=77.0.3"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "django-with-asserts"
+dynamic = ["version"]
+description = "Helpers for testing Django using context managers"
+readme = "README.rst"
+authors = [
+    {name="John Paulett", email="john@paulett.org"},
+]
+license = "BSD-3-Clause"
+license-files = ["LICENSE"]
+requires-python = ">=3.6"
+dependencies = [
+    "lxml",
+    "cssselect",  # split out of lxml.cssselect in v3.0
+]
+classifiers = [
+    "Intended Audience :: Developers",
+    "Programming Language :: Python",
+    "Environment :: Web Environment",
+    "Framework :: Django",
+    "Topic :: Software Development :: Testing",
+    "Programming Language :: Python :: 3",
+]
+
+[project.urls]
+Homepage = "https://django-with-asserts.readthedocs.org"
+
+[tool.setuptools]
+packages = ["with_asserts"]
+
+[tool.setuptools.dynamic]
+version = {attr="with_asserts.__version__"}
